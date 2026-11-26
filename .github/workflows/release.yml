@@ -17,7 +17,7 @@ jobs:
       attestations: write
     env:
       TAG: ${{ github.event.release.tag_name }}
-      ZIP: double-subs_${{ github.event.release.tag_name }}.zip
+      ASSET: double-subs_${{ github.event.release.tag_name }}.zip
     steps:
       - uses: actions/checkout@v4
 
@@ -39,17 +39,17 @@ jobs:
       - name: Build
         run: |
           dotnet publish Jellyfin.Plugin.DoubleSubs -c Release -o out
-          (cd out && zip "../$ZIP" Jellyfin.Plugin.DoubleSubs.dll)
+          (cd out && zip "../$ASSET" Jellyfin.Plugin.DoubleSubs.dll)
 
       - name: Attest build provenance
         uses: actions/attest-build-provenance@v2
         with:
-          subject-path: ${{ env.ZIP }}
+          subject-path: ${{ env.ASSET }}
 
       - name: Upload release assets
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ env.ZIP }}
+          files: ${{ env.ASSET }}
 
       - name: Add the version to manifest.json
         env:
@@ -60,7 +60,7 @@ jobs:
           git fetch origin "$BRANCH"
           git checkout "$BRANCH"
           node -e '
-            const fs = require("fs"), crypto = require("crypto"), { TAG, ZIP, REPO, CHANGELOG } = process.env;
+            const fs = require("fs"), crypto = require("crypto"), { TAG, ASSET, REPO, CHANGELOG } = process.env;
             const manifest = JSON.parse(fs.readFileSync("manifest.json", "utf8"));
             const plugin = manifest[0];
             plugin.versions = plugin.versions.filter(v => v.version !== `${TAG}.0`);
@@ -68,8 +68,8 @@ jobs:
               version: `${TAG}.0`,
               changelog: CHANGELOG || "",
               targetAbi: "12.4.0.0",
-              sourceUrl: `https://github.com/${REPO}/releases/download/${TAG}/${ZIP}`,
-              checksum: crypto.createHash("md5").update(fs.readFileSync(ZIP)).digest("hex"),
+              sourceUrl: `https://github.com/${REPO}/releases/download/${TAG}/${ASSET}`,
+              checksum: crypto.createHash("md5").update(fs.readFileSync(ASSET)).digest("hex"),
               timestamp: new Date().toISOString().replace(/\.\d+Z$/, "Z"),
             });
             fs.writeFileSync("manifest.json", JSON.stringify(manifest, null, 2) + "\n");
