@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <!-- Keep in sync with VERSION in web/doublesubs.js; the release workflow checks both against the tag. -->
+    <Version>0.1.0</Version>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <!-- Provided by the server at runtime, so only compile against them. -->
+    <PackageReference Include="Jellyfin.Controller" Version="12.4.0" ExcludeAssets="runtime" />
+    <PackageReference Include="Jellyfin.Model" Version="12.4.0" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The client script, served from the DLL at /DoubleSubs/doublesubs.js -->
+    <EmbeddedResource Include="../web/doublesubs.js" LogicalName="doublesubs.js" />
+  </ItemGroup>
+
+</Project>
