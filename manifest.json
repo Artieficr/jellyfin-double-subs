@@ -6,6 +6,15 @@
     "overview": "Watch with two subtitle languages at once",
     "owner": "Artieficr",
     "category": "Subtitles",
-    "versions": []
+    "versions": [
+      {
+        "version": "0.1.0.0",
+        "changelog": "# First release\n\nDouble subs for Jellyfin 12.4: two subtitle languages on screen at once, plus a pause history\nyou can click to rewind. A server plugin that adds it to the Jellyfin web player and the apps built on\nit. So far it has been tested in Jellyfin Desktop 2.0 on Linux.\n\n- **Double subs** in the player's subtitles menu: pick a main and a secondary language. The main\n  line is large on top, the secondary smaller below. Or show only one of them, at the main size.\n  The lines move up out of the way while the player controls are shown.\n- **Size and position:** arrows in the Double subs dialog make the subtitles bigger or smaller (both\n  languages keep their proportions) and move them up or down. A sample line previews the result while\n  you adjust. Saved per user.\n- **Pause history:** pausing shows the latest lines in both languages, newest at the bottom, as many\n  as fit the screen. Click a line to jump back to where it starts.\n- **Default languages:** the gear next to Double subs sets your main and secondary language.\n  Double subs then turns on by itself when a file has both (you can switch that off). When a\n  language has several tracks, the full one is picked over a signs-only one. Settings are saved per\n  user on the server, so they follow you to other devices.\n- **Timing alignment:** if the secondary subtitles are shifted against the main ones (often a\n  different subtitle release), the shift is detected and corrected on screen. You can also set it by\n  hand. Each secondary line appears and disappears together with the main line it belongs to.\n  Your subtitle files are never changed.\n- **Merged lines split back:** when one language packs two lines into one (two speakers, or two\n  sentences), it is split to sit under the right main lines.\n- **Blu-ray (PGS) and DVD (VobSub) subtitles** work too, using the decoder that comes with Jellyfin.\n  Text and image subtitles can be mixed.\n- **TV remotes:** the dialogs and the pause history can be used with the arrow keys and Back.\n\nInstall: Dashboard → Plugins → Repositories → add\n`https://raw.githubusercontent.com/Artieficr/jellyfin-double-subs/main/manifest.json`, then install\n**Double Subs** from the catalog and restart the server. No other plugins needed.\n\nKnown limitations:\n\n- Not available in native players (Android TV, Swiftfin, the Android app's \"Integrated player\").\n- DVD (VobSub) subtitles haven't been tested with a real file yet, only the decoding was checked.\n- TV remote navigation hasn't been tried on an actual TV yet.\n",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://github.com/Artieficr/jellyfin-double-subs/releases/download/0.1.0/double-subs_0.1.0.zip",
+        "checksum": "0ff5eaa232d6629e86ebbdb2c2af1fe0",
+        "timestamp": "2026-11-26T02:07:49Z"
+      }
+    ]
   }
 ]
